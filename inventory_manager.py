@@ -39,6 +39,8 @@ def main():
         print("1. Add Item")
         print("2. Remove Item")
         print("3. View Inventory")
+        print("4. Check Stock")
+        print("5. Exit")
 
         try:
             choice = input("Choose an option: ")
@@ -82,6 +84,21 @@ def main():
                     for item, qty in inventory.items():
                         if qty > 0:
                             print(f"{qty} of {item}(s)")
+
+            elif choice == "4":
+                item = input("Enter item name: ").lower()
+                stock = manager.get_stock(item)
+                if stock == 0:
+                    print(f"\n{item} not found")
+                else:
+                    print(f"\nStock of {item}: {stock}")
+
+            elif choice == "5":
+                print("\nExiting Fruit Inventory Manager.")
+                break
+
+            else:
+                print("\nInvalid choice.")
 
         except ValueError as ve:
             print(f"\nInput error: {ve}")
