@@ -37,6 +37,7 @@ def main():
     while True:
         print("\nInventory Manager")
         print("1. Add Item")
+        print("2. Remove Item")
 
         try:
             choice = input("Choose an option: ")
@@ -51,6 +52,25 @@ def main():
                         print(f"\nAdded {quantity} of {item}.")
                     else:
                         print("\nInvalid quantity. Item not added.")
+
+            elif choice == "2":
+                item = input("Enter item name to remove: ").lower()
+                if item == "":
+                    print("\nPlease enter the Fruit name.")
+                else:
+                    quantity = int(input("Enter quantity to remove: "))
+                    result = manager.remove_item(item, quantity)
+                    if result:
+                        print(f"\nSuccessfully removed {quantity} of {item}.")
+                    else:
+                        if quantity <= 0:
+                            print("\nInvalid removal quantity.")
+                        elif item not in data.inventory:
+                            print(f"\n{item} not found.")
+                        else:
+                            available = data.inventory.get(item, 0)
+                            print(f"Can't remove {item} of {quantity}. \
+                                Only {available} available.")
 
         except ValueError as ve:
             print(f"\nInput error: {ve}")
