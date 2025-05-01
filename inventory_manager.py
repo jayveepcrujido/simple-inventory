@@ -38,6 +38,7 @@ def main():
         print("\nInventory Manager")
         print("1. Add Item")
         print("2. Remove Item")
+        print("3. View Inventory")
 
         try:
             choice = input("Choose an option: ")
@@ -71,6 +72,16 @@ def main():
                             available = data.inventory.get(item, 0)
                             print(f"Can't remove {item} of {quantity}. \
                                 Only {available} available.")
+
+            elif choice == "3":
+                inventory = manager.view_inventory()
+                if not inventory:
+                    print("\nNo item found.")
+                else:
+                    print("\nInventory List:")
+                    for item, qty in inventory.items():
+                        if qty > 0:
+                            print(f"{qty} of {item}(s)")
 
         except ValueError as ve:
             print(f"\nInput error: {ve}")
